@@ -1,0 +1,17 @@
+{
+  "name": "spartaksun/orientdb-entity",
+  "type": "package",
+  "license" : "Apache-2.0",
+  "stability": "dev",
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.5.0",
+    "spartaksun/orientdb-query": "dev-master",
+    "ostico/phporient": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "spartaksun\\OrientDb\\": "src/"
+    }
+  }
+}
