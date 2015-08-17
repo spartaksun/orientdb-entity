@@ -57,13 +57,13 @@ Usage in Symfony2 controller:
 $this->get('orient.em');
 ```
 
-```
+```php
 // Init repository
 $repository = $this->get('orient.em')
         ->getRepository( Country::class );
 ```    
     
-```
+```php
 // Get all countries
 $countries = $repository->findAll();
 foreach($countries as $country) {
@@ -71,13 +71,13 @@ foreach($countries as $country) {
 }
 ```
         
-```
+```php
 // Add new country
 $country = new Country();
 $country->name = 'Ukraine';
 ```
         
-```
+```php
 if($repository->persist($country)) {
     $rid = $country->getRid();
 } else {
@@ -85,7 +85,7 @@ if($repository->persist($country)) {
 }
 ```   
      
-```
+```php
 // find one
 $country = $repository->find('name=?', 'Ukraine')
 ```
