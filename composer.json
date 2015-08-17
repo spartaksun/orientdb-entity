@@ -1,5 +1,6 @@
 {
   "name": "spartaksun/orientdb-entity",
+  "description": "OrientDb entity manager",
   "type": "package",
   "license" : "Apache-2.0",
   "stability": "dev",
