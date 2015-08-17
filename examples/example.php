@@ -45,6 +45,11 @@ $manager = new \spartaksun\OrientDb\EntityManager(
     'your_orient_db_name'
 );
 
+// Set mapping of OrientDb classes to your PHP classes
+$manager->classMap = [
+    "User" =>  User::class
+];
+
 
 // Initialize repository
 $repository = $manager->getRepository(User::class);
