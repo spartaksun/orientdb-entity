@@ -161,6 +161,7 @@ class Repository
     {
         $params = $object->getAttributes();
         $sql = (new Query())->update($this->dbClass)
+            ->where('@rid=?', $object->getRid())
             ->set($params)
             ->getRaw();
 
