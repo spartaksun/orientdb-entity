@@ -86,10 +86,10 @@ class Repository
 
         if (empty($object->getRid())) {
             $object->setRid(
-                $this->insert($object->getAttributes())
+                $this->insert($object)
             );
         } else {
-            //TODO Update entity
+            $this->update($object);
         }
 
         return true;
@@ -114,8 +114,8 @@ class Repository
     /**
      * Compose validator from parameters
      * @param array $validatorParams
-     * @return \spartaksun\OrientDb\Validators\Validator
-     * @throws \ErrorException
+     * @return Validators\Validator
+     * @throws Exception
      */
     protected function buildValidators(array $validatorParams)
     {
@@ -132,12 +132,14 @@ class Repository
     }
 
     /**
-     * @param $params
+     * Insert new entity document
+     * @param EntityInterface $object
      * @return EntityInterface
-     * @throws \Exception
+     * @internal param $params
      */
-    public function insert($params)
+    protected function insert(EntityInterface $object)
     {
+        $params = $object->getAttributes();
         $sql = (new Query())->insert()
             ->into($this->dbClass)
             ->fields(array_keys($params))
@@ -148,6 +150,21 @@ class Repository
         /* @var $record Record */
 
         return $record->getRid();
+    }
+
+    /**
+     * Update entity document
+     * @param EntityInterface $object
+     * @return mixed
+     */
+    protected function update(EntityInterface $object)
+    {
+        $params = $object->getAttributes();
+        $sql = (new Query())->update($this->dbClass)
+            ->set($params)
+            ->getRaw();
+
+        return $this->prepareClient()->command($sql);
     }
 
     /**

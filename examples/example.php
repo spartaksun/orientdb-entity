@@ -1,5 +1,7 @@
 <?php
 
+require "../vendor/autoload.php";
+
 // Define entity and validators in it
 
 /**
@@ -30,20 +32,16 @@ class User extends spartaksun\OrientDb\Entity
 }
 
 
-// Define OrientDb connection settings
-$connectionSettings = [
-    'hostname' => 'localhost',
-    'port' => 2424,
-    'username' => 'root',
-    'password' => 'root',
-];
+// Define OrientDb client
 
+$client = new \PhpOrient\PhpOrient();
+$client->hostname = 'localhost';
+$client->port = 2424;
+$client->username = 'root';
+$client->password = 'root';
 
 // Initialize entity manager
-$manager = new \spartaksun\OrientDb\EntityManager(
-    new \PhpOrient\PhpOrient($connectionSettings),
-    'your_orient_db_name'
-);
+$manager = new \spartaksun\OrientDb\EntityManager($client, 'your_orientdb_name');
 
 // Set mapping of OrientDb classes to your PHP classes
 $manager->classMap = [
